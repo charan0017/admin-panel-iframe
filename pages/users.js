@@ -68,7 +68,10 @@ export default function Users() {
         <>
             <Row>
                 <Col>
-                    <InputGroup size="md" className="my-3 me-3 w-18 float-end"
+                    <h4 className="text-decoration-underline ms-3 my-2 text-capitalize">{lastSortedBy}</h4>
+                </Col>
+                <Col xs={6} sm={6} md={3}>
+                    <InputGroup size="md" className="my-2 pe-2 float-end"
                                 onChange={(e) => searchUsersDebounced(e.target.value)}
                     >
                         <InputGroup.Text>
@@ -101,9 +104,9 @@ export default function Users() {
                         <td>{user.id}</td>
                         <td>{user.name}</td>
                         <td>{user.username}</td>
-                        <td><a className="text-decoration-none" href={`mailto:${user.email}`}>{user.email}</a></td>
-                        <td><a className="text-decoration-none" href={`tel:${user.phone}`}>{user.phone}</a></td>
-                        <td><a className="text-decoration-none" href={user.website} target="_blank" rel="noreferrer">{user.website}</a></td>
+                        <td><a className="text-decoration-none text-dark" href={`mailto:${user.email}`}>{user.email}</a></td>
+                        <td><a className="text-decoration-none text-dark" href={`tel:${user.phone}`}>{user.phone}</a></td>
+                        <td><a className="text-decoration-none text-dark" href={user.website} target="_blank" rel="noreferrer">{user.website}</a></td>
                         <td><Button size="sm">View Profile</Button></td>
                         <td><Button size="sm">View Post</Button></td>
                     </tr>

@@ -1,0 +1,23 @@
+.sidenav {
+    height: 100%;
+    width: 7.5rem;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #d0d6f5;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.stickyRight {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .sidenav {
+        display: none;
+    }
+}

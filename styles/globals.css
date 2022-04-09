@@ -1,5 +1,13 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
-.w-18 {
-    width: 18% !important;
+.w-40 {
+    width: 40% !important;
+}
+
+.h-vh-100 {
+    height: 100vh !important;
+}
+
+.bg-dark-info {
+    background-color: #e8ebfa !important;
 }
