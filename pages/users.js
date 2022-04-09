@@ -18,19 +18,15 @@ export default function Users() {
         setUsers(data);
     }, []);
 
-    const searchUsers = useCallback((searchVal) => {
-        setSearch(searchVal);
-        setFilteredUsers(users.filter(user => {
-            const searchLower = searchVal.toLowerCase();
-            return user.name.toLowerCase().includes(searchLower)
-                || user.username.toLowerCase().includes(searchLower)
-                || user.email.toLowerCase().includes(searchLower)
-                || user.phone.toLowerCase().includes(searchLower)
-                || user.website.toLowerCase().includes(searchLower);
-        }));
-    }, [users]);
-
-    const searchUsersDebounced = useDebouncedCallback(searchUsers, 500);
+    const sortUsersData = useCallback((usersData, sortBy = lastSortedBy) => {
+        return usersData.sort((a, b) => {
+            if (sortBy === 'id') {
+                return a.id - b.id;
+            } else {
+                return a[sortBy].localeCompare(b[sortBy]);
+            }
+        });
+    }, [lastSortedBy]);
 
     const sortUsers = useCallback((e, sortBy) => {
         e.preventDefault();
@@ -39,15 +35,24 @@ export default function Users() {
             return;
         }
 
-        setUsers(users.sort((a, b) => {
-            if (sortBy === 'id') {
-                return a.id - b.id;
-            } else {
-                return a[sortBy].localeCompare(b[sortBy]);
-            }
-        }));
+        setUsers(sortUsersData(users, sortBy));
+        setFilteredUsers(sortUsersData(filteredUsers, sortBy));
         setLastSortedBy(sortBy);
-    }, [lastSortedBy, users]);
+    }, [lastSortedBy, users, filteredUsers, sortUsersData]);
+
+    const searchUsers = useCallback((searchVal) => {
+        setSearch(searchVal);
+        const filteredUsersData = users.filter(user => {
+            const searchLower = searchVal.toLowerCase();
+            return user.name.toLowerCase().includes(searchLower)
+                || user.username.toLowerCase().includes(searchLower)
+                || user.email.toLowerCase().includes(searchLower)
+                || user.phone.toLowerCase().includes(searchLower)
+                || user.website.toLowerCase().includes(searchLower);
+        });
+        setFilteredUsers(sortUsersData(filteredUsersData));
+    }, [users, sortUsersData]);
+    const searchUsersDebounced = useDebouncedCallback(searchUsers, 500);
 
     useEffect(() => {
         fetchUsers();
