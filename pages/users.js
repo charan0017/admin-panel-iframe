@@ -42,16 +42,8 @@ export default function Users() {
         setUsers(users.sort((a, b) => {
             if (sortBy === 'id') {
                 return a.id - b.id;
-            } else if (sortBy === 'name') {
-                return a.name.localeCompare(b.name);
-            } else if (sortBy === 'username') {
-                return a.username.localeCompare(b.username);
-            } else if (sortBy === 'email') {
-                return a.email.localeCompare(b.email);
-            } else if (sortBy === 'phone') {
-                return a.phone.localeCompare(b.phone);
-            } else if (sortBy === 'website') {
-                return a.website.localeCompare(b.website);
+            } else {
+                return a[sortBy].localeCompare(b[sortBy]);
             }
         }));
         setLastSortedBy(sortBy);
@@ -99,7 +91,7 @@ export default function Users() {
                 </tr>
                 </thead>
                 <tbody>
-                {(search ? filteredUsers : users).map((user, index) => (
+                {(search ? filteredUsers : users).map((user) => (
                     <tr key={`${user.id}`}>
                         <td>{user.id}</td>
                         <td>{user.name}</td>
