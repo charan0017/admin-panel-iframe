@@ -1,34 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<h1 align="center">  
+    Admin Panel iFrame  
+</h1>  
 
-First, run the development server:
+<p align="center">  
+   An Admin Panel to see all the users table and their respective profile and posts.  
+</p>
 
+# About App
+This is a simple Next.js App for Admin Panel to view all the available users and their profile and posts.
+> Check the deployed app here 🚀 [https://admin-panel-iframe.vercel.app/](https://admin-panel-iframe.vercel.app/)
+
+# Features
+> 1. List all available users in a Table
+> 2. Sorting feature in the Table
+> 3. Seach feature in the Table
+> 4. Used React Bootstrap for all the JSX elements
+> 5. iFrame Communication Channel to trigger actions using CTAs
+> 6. Added Side Drawer to show Selected User / Profile
+> 7. Next.js Routing with ISR (Increamental Static Re-Generation)
+> 8. Containerized the App using Docker & published to Docker Hub at [here](https://hub.docker.com/repository/docker/charan0017/admin-panel-iframe)
+> 9. Deployed the app to Vercel platform [here](https://admin-panel-iframe.vercel.app/)
+
+# How to Use
+## cloning git repo
 ```bash
-npm run dev
-# or
-yarn dev
+git clone https://github.com/charan0017/admin-panel-iframe.git
+```
+## Run Using Docker
+```bash
+docker build -t admin-panel-iframe .
+docker run -p 3001:3000 admin-panel-iframe
+```
+## Run Locally
+```bash
+yarn install
+yarn start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.jsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
