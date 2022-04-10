@@ -150,13 +150,10 @@ export default function Users({ usersData }) {
 
 export async function getStaticProps() {
     const { data, error } = await requestAPI('/users', {}, false);
-    if (error) {
-        return { notFound: true };
-    }
 
     return {
         props: {
-            usersData: data,
+            usersData: error ? [] : data,
         }
     }
 }
