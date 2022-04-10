@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
-import { Table, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap';
+import { Table, Row, Col, Button, InputGroup, FormControl, Spinner } from 'react-bootstrap';
 import { FaSearch, FaSortUp } from 'react-icons/fa';
 import { useIframePublisher } from '../hooks';
 import { requestAPI } from '../utils';
@@ -139,7 +139,7 @@ export default function Users() {
                 </tbody>
             </Table>
             {users.length === 0 && (
-                <h6 className="text-center">Loading users...</h6>
+                <div className="text-center"><Spinner animation="border" variant="dark" /></div>
             )}
             {search && filteredUsers.length === 0 && (
                 <h6 className="text-center">No users found</h6>
