@@ -27,9 +27,6 @@ export default function Home() {
         }
     });
 
-    console.log(userProfile);
-    console.log(userPosts);
-
     return (
         <Container className="bg-dark-info m-0 pb-5">
             <Head>

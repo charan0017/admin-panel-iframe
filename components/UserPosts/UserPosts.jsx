@@ -18,7 +18,7 @@ export default function UserPosts({ isLoading, userPostsData }) {
     }
 
     return (
-        <Container>
+        <Container className="mb-3">
             {userPostsData.map((post, index) => (
                 <Card key={`${post.id}`} className="w-100 mt-3">
                     <Card.Header>
