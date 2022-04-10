@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head'
 import { Container, Row, Col } from 'react-bootstrap';
 import { useIframeSubscriber } from '../hooks';
-import { SideNav, SideModal, UserProfile, UserPosts } from '../components';
+import { SideNav, SideDrawer, UserProfile, UserPosts } from '../components';
 import { PUBSUB_ACTION_TYPE_PROFILE, PUBSUB_ACTION_TYPE_POSTS, PUBSUB_ACTION_TYPE_LOADING_POSTS } from '../constants';
 
 export default function Home() {
@@ -55,22 +55,22 @@ export default function Home() {
                 onProfileClick={() => setShowUserProfileModal(true)}
                 onPostsClick={() => setShowUserPostsModal(true)}
             />
-            <SideModal
+            <SideDrawer
                 title="Profile"
                 modalIsOpen={showUserProfileModal}
                 setModalIsOpen={setShowUserProfileModal}
                 onModalClose={() => setUserProfile(null)}
             >
                 <UserProfile userProfileData={userProfile} />
-            </SideModal>
-            <SideModal
+            </SideDrawer>
+            <SideDrawer
                 title="Posts"
                 modalIsOpen={showUserPostsModal}
                 setModalIsOpen={setShowUserPostsModal}
                 onModalClose={() => setUserPosts([])}
             >
                 <UserPosts isLoading={showLoadingPostsModal} userPostsData={userPosts} />
-            </SideModal>
+            </SideDrawer>
         </Container>
     )
 }
