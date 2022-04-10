@@ -137,7 +137,7 @@ export default function Users() {
                 </tbody>
             </Table>
             {users.length === 0 && (
-                <h6 className="text-center">No users found</h6>
+                <h6 className="text-center">Loading users...</h6>
             )}
             {search && filteredUsers.length === 0 && (
                 <h6 className="text-center">No users found</h6>
