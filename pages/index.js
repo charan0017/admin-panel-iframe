@@ -1,8 +1,26 @@
+import { useState } from 'react';
 import Head from 'next/head'
 import { Container, Row, Col } from 'react-bootstrap';
+import { useIframeSubscriber } from '../hooks';
 import { Sidenav } from '../components';
+import { PUBSUB_ACTION_TYPE_PROFILE, PUBSUB_ACTION_TYPE_POSTS } from '../constants';
 
 export default function Home() {
+    const [iframeRef, setIframeRef] = useState(null);
+    const [userProfile, setUserProfile] = useState(null);
+    const [userPosts, setUserPosts] = useState([]);
+
+    useIframeSubscriber(iframeRef, (type, payload) => {
+        if (type === PUBSUB_ACTION_TYPE_PROFILE) {
+            setUserProfile(payload);
+        } else if (type === PUBSUB_ACTION_TYPE_POSTS) {
+            setUserPosts(payload);
+        }
+    });
+
+    console.log(userProfile);
+    console.log(userPosts);
+
     return (
         <Container className="bg-dark-info m-0 pb-5">
             <Head>
@@ -20,7 +38,7 @@ export default function Home() {
             <Row className="m-0">
                 <Col className="p-0">
                     <div className="w-100 h-vh-100">
-                            <iframe src="/users" className="w-100 h-100 border rounded-3" />
+                        <iframe ref={setIframeRef} src="/users" className="w-100 h-100 border rounded-3" />
                     </div>
                 </Col>
             </Row>

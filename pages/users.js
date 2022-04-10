@@ -2,13 +2,18 @@ import { useState, useEffect, useCallback } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { Table, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap';
 import { FaSearch, FaSortUp } from 'react-icons/fa';
+import { useIframePublisher } from '../hooks';
 import { requestAPI } from '../utils';
+import { PUBSUB_ACTION_TYPE_PROFILE, PUBSUB_ACTION_TYPE_POSTS } from '../constants';
 
 export default function Users() {
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [search, setSearch] = useState('');
     const [lastSortedBy, setLastSortedBy] = useState('id');
+    const [selectedUserId, setSelectedUserId] = useState(null);
+    const [selectedUserPosts, setSelectedUserPosts] = useState([]);
+    const { publishAction } = useIframePublisher();
 
     const fetchUsers = useCallback(async () => {
         const { data, error } = await requestAPI('/users', {}, false);
@@ -53,6 +58,24 @@ export default function Users() {
         setFilteredUsers(sortUsersData(filteredUsersData));
     }, [users, sortUsersData]);
     const searchUsersDebounced = useDebouncedCallback(searchUsers, 500);
+
+    const fetchAndPublishUserPosts = useCallback(async (userId) => {
+        if (userId === selectedUserId) {
+            publishAction(PUBSUB_ACTION_TYPE_POSTS, selectedUserPosts);
+            return;
+        }
+
+        const { data, error } = await requestAPI(`/posts?userId=${userId}`, {}, false);
+        if (error) {
+            setSelectedUserPosts([]);
+            publishAction(PUBSUB_ACTION_TYPE_POSTS, []);
+            return;
+        }
+
+        setSelectedUserId(userId);
+        setSelectedUserPosts(data);
+        publishAction(PUBSUB_ACTION_TYPE_POSTS, data);
+    }, [publishAction, selectedUserId, selectedUserPosts]);
 
     useEffect(() => {
         fetchUsers();
@@ -107,8 +130,8 @@ export default function Users() {
                         <td><a className="text-decoration-none text-dark" href={`mailto:${user.email}`}>{user.email}</a></td>
                         <td><a className="text-decoration-none text-dark" href={`tel:${user.phone}`}>{user.phone}</a></td>
                         <td><a className="text-decoration-none text-dark" href={user.website} target="_blank" rel="noreferrer">{user.website}</a></td>
-                        <td><Button size="sm">View Profile</Button></td>
-                        <td><Button size="sm">View Post</Button></td>
+                        <td><Button size="sm" onClick={() => publishAction(PUBSUB_ACTION_TYPE_PROFILE, user)}>View Profile</Button></td>
+                        <td><Button size="sm" onClick={() => fetchAndPublishUserPosts(user.id)}>View Post</Button></td>
                     </tr>
                 ))}
                 </tbody>
