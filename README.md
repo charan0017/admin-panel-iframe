@@ -30,11 +30,20 @@ git clone https://github.com/charan0017/admin-panel-iframe.git
 ## Run Using Docker
 ```bash
 docker build -t admin-panel-iframe .
-docker run -p 3001:3000 admin-panel-iframe
+docker run -p 3000:3000 admin-panel-iframe
 ```
+open [http://localhost:3000](http://localhost:3000)
 ## Run Locally
 ```bash
 yarn install
 yarn start
 ```
+open [http://localhost:3000](http://localhost:3000)
+
+## clone and Run Docker Container
+```bash
+docker push charan0017/admin-panel-iframe:latest
+docker run -p 3000:3000 -d charan0017/admin-panel-iframe:latest
+```
+open [http://localhost:3000](http://localhost:3000)
 
