@@ -6,22 +6,14 @@ import { useIframePublisher } from '../hooks';
 import { requestAPI } from '../utils';
 import { PUBSUB_ACTION_TYPE_PROFILE, PUBSUB_ACTION_TYPE_POSTS, PUBSUB_ACTION_TYPE_LOADING_POSTS } from '../constants';
 
-export default function Users() {
-    const [users, setUsers] = useState([]);
+export default function Users({ usersData }) {
+    const [users, setUsers] = useState(usersData);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [search, setSearch] = useState('');
     const [lastSortedBy, setLastSortedBy] = useState('id');
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [selectedUserPosts, setSelectedUserPosts] = useState([]);
     const { publishAction } = useIframePublisher();
-
-    const fetchUsers = useCallback(async () => {
-        const { data, error } = await requestAPI('/users', {}, false);
-        if (error) {
-            return;
-        }
-        setUsers(data);
-    }, []);
 
     const sortUsersData = useCallback((usersData, sortBy = lastSortedBy) => {
         return usersData.sort((a, b) => {
@@ -79,9 +71,17 @@ export default function Users() {
         publishAction(PUBSUB_ACTION_TYPE_POSTS, data);
     }, [publishAction, selectedUserId, selectedUserPosts]);
 
-    useEffect(() => {
-        fetchUsers();
-    }, [fetchUsers]);
+    //// Used Next.js GetStaticProps feature instead of using React.useEffect ////
+    // const fetchUsers = useCallback(async () => {
+    //     const { data, error } = await requestAPI('/users', {}, false);
+    //     if (error) {
+    //         return;
+    //     }
+    //     setUsers(data);
+    // }, []);
+    // useEffect(() => {
+    //     fetchUsers();
+    // }, [fetchUsers]);
 
     const SortByLink = ({ sortBy }) => (
         <a href="#" onClick={(e) => sortUsers(e, sortBy)}>
@@ -146,4 +146,17 @@ export default function Users() {
             )}
         </>
     );
+}
+
+export async function getStaticProps() {
+    const { data, error } = await requestAPI('/users', {}, false);
+    if (error) {
+        return { notFound: true };
+    }
+
+    return {
+        props: {
+            usersData: data,
+        }
+    }
 }
