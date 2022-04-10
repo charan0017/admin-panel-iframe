@@ -21,6 +21,7 @@ export default function SideDrawer({ title, children, modalIsOpen, setModalIsOpe
 
     return (
         <div ref={modalRef} className={`${styles.sideModal} ${modalIsOpen ? '' : 'd-none'}`} onClick={handleClickOutside}>
+            <div className={styles.sideModalVr}>&nbsp;</div>
             <div className={styles.sideModalContent}>
                 <Row className="sticky-top m-0 bg-dark-info">
                     <Col>

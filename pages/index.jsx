@@ -28,7 +28,7 @@ export default function Home() {
     });
 
     return (
-        <Container className="bg-dark-info m-0 pb-5">
+        <Container className="bg-dark-info m-0 pb-5 max-width-100">
             <Head>
                 <title>Admin Panel iFrame</title>
                 <meta name="description" content="Admin Panel for showing users and their posts" />

@@ -8,6 +8,10 @@
     height: 100vh !important;
 }
 
+.max-width-100 {
+    max-width: 100% !important;
+}
+
 .bg-dark-info {
     background-color: #e8ebfa !important;
 }

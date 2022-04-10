@@ -1,3 +1,14 @@
+.sideNavVr {
+    height: 100%;
+    width: 2px;
+    display: block;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    background-color: #aaa;
+    right: 7.5rem;
+}
+
 .sideNav {
     height: 100%;
     width: 7.5rem;
@@ -11,7 +22,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .sideNav {
+    .sideNav, .sideNavVr {
         display: none;
     }
 }
