@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Head from 'next/head'
 import { Container, Row, Col } from 'react-bootstrap';
 import { useIframeSubscriber } from '../hooks';
-import { SideNav, SideModal, UserProfile } from '../components';
+import { SideNav, SideModal, UserProfile, UserPosts } from '../components';
 import { PUBSUB_ACTION_TYPE_PROFILE, PUBSUB_ACTION_TYPE_POSTS } from '../constants';
 
 export default function Home() {
@@ -57,6 +57,14 @@ export default function Home() {
                 onModalClose={() => setUserProfile(null)}
             >
                 <UserProfile userProfileData={userProfile} />
+            </SideModal>
+            <SideModal
+                title="Posts"
+                modalIsOpen={showUserPostsModal}
+                setModalIsOpen={setShowUserPostsModal}
+                onModalClose={() => setUserPosts([])}
+            >
+                <UserPosts userPostsData={userPosts} />
             </SideModal>
         </Container>
     )

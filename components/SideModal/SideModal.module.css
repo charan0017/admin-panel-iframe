@@ -1,12 +1,14 @@
 .sideModal {
     height: 100%;
     width: 100%;
+    display: block;
     position: fixed;
     z-index: 2;
     top: 0;
     right: 0;
     background-color: #000;
     background-color: rgba(0, 0, 0, 0.4);
+    overflow: hidden;
 }
 
 .sideModalContent {
@@ -17,4 +19,5 @@
     top: 0;
     right: 0;
     background-color: #d0d6f5;
+    overflow: hidden;
 }
