@@ -1,10 +1,10 @@
 import { Row, Col } from 'react-bootstrap';
 import { FaIdCard, FaEnvelope } from 'react-icons/fa';
-import styles from './Sidenav.module.css';
+import styles from './SideNav.module.css';
 
-export default function Sidenav() {
+export default function SideNav() {
     return (
-        <div className={styles.sidenav}>
+        <div className={styles.sideNav}>
             <div className={styles.stickyRight}>
                 <Row className="mt-3">
                     <Col>

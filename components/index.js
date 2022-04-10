@@ -1,3 +1,4 @@
-import Sidenav from './Sidenav';
+import SideNav from './SideNav';
+import SideModal from './SideModal';
 
-export { Sidenav };
+export { SideNav, SideModal };

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Head from 'next/head'
 import { Container, Row, Col } from 'react-bootstrap';
 import { useIframeSubscriber } from '../hooks';
-import { Sidenav } from '../components';
+import { SideNav, SideModal } from '../components';
 import { PUBSUB_ACTION_TYPE_PROFILE, PUBSUB_ACTION_TYPE_POSTS } from '../constants';
 
 export default function Home() {
@@ -29,7 +29,13 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Sidenav />
+            <SideNav />
+            <SideModal>
+                Hi
+            </SideModal>
+            <SideModal>
+                Hello
+            </SideModal>
             <Row>
                 <Col>
                     <h1 className="text-center mt-4 mb-2 fw-bold">Admin Panel iFrame</h1>
