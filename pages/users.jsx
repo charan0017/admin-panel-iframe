@@ -6,6 +6,8 @@ import { useIframePublisher } from '../hooks';
 import { requestAPI } from '../utils';
 import { PUBSUB_ACTION_TYPE_PROFILE, PUBSUB_ACTION_TYPE_POSTS, PUBSUB_ACTION_TYPE_LOADING_POSTS } from '../constants';
 
+const PAGE_REVALIDATION_TIMEOUT = 4 * 60 * 60;
+
 export default function Users({ usersData }) {
     const [users, setUsers] = useState(usersData);
     const [filteredUsers, setFilteredUsers] = useState([]);
@@ -154,6 +156,7 @@ export async function getStaticProps() {
     return {
         props: {
             usersData: error ? [] : data,
-        }
+        },
+        revalidate: PAGE_REVALIDATION_TIMEOUT,
     }
 }
