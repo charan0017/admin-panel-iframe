@@ -1,12 +1,12 @@
 .sideNav {
     height: 100%;
     width: 7.5rem;
-    position: absolute;
+    display: block;
+    position: fixed;
     z-index: 1;
     top: 0;
     right: 0;
     background-color: #d0d6f5;
-    overflow-x: hidden;
     padding-top: 20px;
 }
 
@@ -17,7 +17,7 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .sidenav {
+    .sideNav {
         display: none;
     }
 }
