@@ -4,7 +4,7 @@ import { Table, Row, Col, Button, InputGroup, FormControl } from 'react-bootstra
 import { FaSearch, FaSortUp } from 'react-icons/fa';
 import { useIframePublisher } from '../hooks';
 import { requestAPI } from '../utils';
-import { PUBSUB_ACTION_TYPE_PROFILE, PUBSUB_ACTION_TYPE_POSTS } from '../constants';
+import { PUBSUB_ACTION_TYPE_PROFILE, PUBSUB_ACTION_TYPE_POSTS, PUBSUB_ACTION_TYPE_LOADING_POSTS } from '../constants';
 
 export default function Users() {
     const [users, setUsers] = useState([]);
@@ -64,6 +64,8 @@ export default function Users() {
             publishAction(PUBSUB_ACTION_TYPE_POSTS, selectedUserPosts);
             return;
         }
+
+        publishAction(PUBSUB_ACTION_TYPE_LOADING_POSTS, true);
 
         const { data, error } = await requestAPI(`/posts?userId=${userId}`, {}, false);
         if (error) {

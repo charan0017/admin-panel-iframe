@@ -1,12 +1,12 @@
 import { Container, Row, Col, Card, Badge } from 'react-bootstrap';
 
-export default function UserPosts({ userPostsData }) {
-    if (!Array.isArray(userPostsData) || userPostsData.length < 1) {
+export default function UserPosts({ isLoading, userPostsData }) {
+    if (isLoading || !Array.isArray(userPostsData) || userPostsData.length < 1) {
         return (
             <Container>
                 <Row className="mt-3">
                     <Col>
-                        <h6 className="text-center">No Profile Selected to show the posts!</h6>
+                        <h6 className="text-center">{isLoading ? 'Loading Posts' : 'No Profile Selected to show the posts!'}</h6>
                     </Col>
                 </Row>
             </Container>
